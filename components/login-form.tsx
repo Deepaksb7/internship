@@ -55,8 +55,9 @@ export function LoginForm({
       toast.error(result.error)
     }
 
-    toast.success("Logged in successfully")
+    
     if (result?.url) {
+      toast.success("Logged in successfully")
       router.replace("/dashboard")
     }
 
@@ -105,8 +106,8 @@ export function LoginForm({
                   />
 
                 </div>
-                <div className="grid gap-3">
-                  <Button type="submit" className="w-full">
+                <div className="grid gap-3 ">
+                  <Button type="submit" className="w-full cursor-pointer">
                     Login
                   </Button>
                 </div>

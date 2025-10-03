@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button"
 import {
     Card,
     CardContent,
-    CardDescription,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
@@ -23,6 +22,7 @@ import { z } from "zod"
 import { useState, useEffect } from "react"
 import axios, { AxiosError } from "axios"
 import { toast } from "sonner"
+import { redirect } from "next/navigation"
 
 const formSchema = z.object({
     name: z.string().min(2).max(50),
@@ -46,34 +46,38 @@ export function SignupForm({
         },
     })
 
-
     async function onSubmit(values: z.infer<typeof formSchema>) {
         setIsSubmiting(true)
         try {
             const response = await axios.post("/api/signup", values)
-            toast.success(response.data.message)
-            setIsSubmiting(false)
+            toast.success(response.data?.message || "Signup successful!")
             form.reset()
-
+            redirect("/login")
         } catch (error) {
-            console.error("Error in signup of user",error)
-            toast.error("Error in signup of user");
+            if (axios.isAxiosError(error)) {
+                const message = error.response?.data?.message || "Signup failed"
+                toast.error(message)
+            } else {
+                toast.error("An unexpected error occurred")
+            }
+            console.error("Error in signup of user", error)
+        } finally {
             setIsSubmiting(false)
         }
-    
     }
+
     return (
         <div className={cn("flex flex-col min-h-[65vh] gap-6", className)} {...props}>
             <Card>
                 <CardHeader className="text-center">
                     <CardTitle className="text-xl">Welcome back</CardTitle>
-                    
+
                 </CardHeader>
                 <CardContent>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                             <div className="grid gap-6">
-                                
+
                                 <div className="grid gap-6">
                                     <div className="grid gap-3">
                                         <FormField
@@ -123,7 +127,7 @@ export function SignupForm({
 
                                     </div>
                                     <div className="grid gap-3">
-                                        <Button type="submit" className="w-full">
+                                        <Button type="submit" className="w-full cursor-pointer">
                                             Sign Up
                                         </Button>
                                     </div>

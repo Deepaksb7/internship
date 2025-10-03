@@ -24,7 +24,6 @@ export const authOptions: NextAuthOptions = {
                 await dbConnect()
                 try {
                     const user = await UserSchema.findOne({ email: credentials.identifier })
-                    console.log("authorize() called with:", credentials);
 
                     if (!user) {
                         throw new Error("User not found")
