@@ -1,6 +1,6 @@
 import { NextAuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
-import CredentialProvider from "next-auth/providers/credentials"
+import CredentialsProvider from "next-auth/providers/credentials"
 import dbConnect from "@/db/dbConnect"
 import UserSchema from "@/models/User"
 import bcrypt from "bcrypt"
@@ -12,11 +12,7 @@ interface Credentials {
 
 export const authOptions: NextAuthOptions = {
     providers: [
-        GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID as string,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-        }),
-        CredentialProvider({
+        CredentialsProvider({
             credentials: {
                 identifier: { label: "Email", type: "text" },
                 password: { label: "Password", type: "password" }
@@ -37,9 +33,13 @@ export const authOptions: NextAuthOptions = {
                     const passwordMatch = await bcrypt.compare(credentials.password, user.password)
 
                     if (passwordMatch) {
-                        return user
+                        return {
+                            id: user._id,
+                            name: user.name,
+                            email: user.email
+                        };
                     } else {
-                        throw new Error("Incorrect password")
+                        throw new Error("Invalid credentials")
                     }
 
                 } catch (error) {
@@ -51,19 +51,29 @@ export const authOptions: NextAuthOptions = {
             }
         })
     ],
-    // callbacks: {
-    //   async jwt({ token, user, session }) {
-    //     if (user) {
-    //       token.user = user
-    //     }
+    callbacks: {
+        async jwt({ token, user, trigger, session }) {
+            if (user) {
+                token.id = user.id;
+                token.name = user.name;
+                token.email = user.email;
+            }
+            if (trigger === "update" && session.name) {
+                token.name = session.name
+            }
 
 
-    //     return token
-    //   },
-    //   async session({ session, token, user }) {
-    //     return session
-    //   },
-    // },
+            return token
+        },
+        async session({ session, token }) {
+            if (session?.user && token) {
+                //session.user.id = token.id as string;
+                session.user.name = token.name as string;
+                session.user.email = token.email as string;
+            }
+            return session
+        }
+    },
     pages: {
         signIn: "/login"
     },
