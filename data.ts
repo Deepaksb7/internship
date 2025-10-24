@@ -1,0 +1,55 @@
+import { Assignments } from "./types/assignment";
+
+const assignments: Assignments[] = [
+    {
+        title: "History Essay - The Roman Empire",
+        course: "HIST 101",
+        dueDate: "Oct 26, 2024 at 11:59 PM",
+        score: 83,
+        maxScore: 100,
+        actionLabel: "View Submissions",
+        actionLink: "#",
+        submissions: [{ name: "Alex Johnson", submitted: true, submissionDate: "Oct 24, 2024", grade: "92/100", link: "#" },
+          { name: "Maria Garcia", submitted: true, submissionDate: "Oct 25, 2024", grade: "88/100", link: "#" },
+          { name: "Chen Wei", submitted: false, grade: "-", link: "-" },],
+    },
+    {
+        title: "Calculus Problem Set 3",
+        course: "MATH 203",
+        dueDate: "Oct 28, 2024 at 5:00 PM",
+        score: 95,
+        maxScore: 100,
+        actionLabel: "Grade",
+        actionLink: "#",
+        submissions: [
+            { name: "Alex Johnson", submitted: true, submissionDate: "Oct 27, 2024", grade: "95/100", link: "#" },
+            { name: "Maria Garcia", submitted: true, submissionDate: "Oct 28, 2024", grade: "90/100", link: "#" },
+        ], 
+    },
+    {
+        title: "Literary Analysis Paper",
+        course: "ENGL 102",
+        dueDate: "Nov 02, 2024 at 11:59 PM",
+        score: 100,
+        maxScore: 100,
+        actionLabel: "View Submissions",
+        actionLink: "#",
+        submissions: [{ name: "Alex Johnson", submitted: false, grade: "-", link: "-" },
+          { name: "Maria Garcia", submitted: true, submissionDate: "Oct 25, 2024", grade: "88/100", link: "#" },
+          { name: "Chen Wei", submitted: false, grade: "-", link: "-" },],
+    },
+    {
+        title: "Physics Lab Report",
+        course: "PHYS 101",
+        dueDate: "Oct 20, 2024 at 11:59 PM",
+        score: 45,
+        maxScore: 100,
+        late: true,
+        actionLabel: "View Submissions",
+        actionLink: "#",
+        submissions: [{ name: "Alex Johnson", submitted: false, grade: "-", link: "-" },
+          { name: "Maria Garcia", submitted: false, grade: "-", link: "-" },
+          { name: "Chen Wei", submitted: false, grade: "-", link: "-" },], 
+    },
+];
+export default assignments;
