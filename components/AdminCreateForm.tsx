@@ -86,14 +86,14 @@ export default function CreateAssignmentPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-10">
-          {/* Assignment Details */}
+   
           <section>
             <h2 className="text-2xl font-bold text-[#0d141b] dark:text-white border-b border-slate-200 dark:border-slate-700 pb-3 mb-4">
               Assignment Details
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-              {/* Title */}
+
               <label className="flex flex-col">
                 <p className="pb-2 text-base font-medium text-[#0d141b] dark:text-slate-300">
                   Assignment Title
@@ -109,7 +109,6 @@ export default function CreateAssignmentPage() {
                 />
               </label>
 
-              {/* Course */}
               <label className="flex flex-col">
                 <p className="pb-2 text-base font-medium text-[#0d141b] dark:text-slate-300">
                   Course
@@ -130,7 +129,6 @@ export default function CreateAssignmentPage() {
                 </select>
               </label>
 
-              {/* Due Date */}
               <label className="flex flex-col">
                 <p className="pb-2 text-base font-medium text-[#0d141b] dark:text-slate-300">
                   Due Date
@@ -145,7 +143,6 @@ export default function CreateAssignmentPage() {
                 />
               </label>
 
-              {/* Time */}
               <label className="flex flex-col">
                 <p className="pb-2 text-base font-medium text-[#0d141b] dark:text-slate-300">
                   Time
@@ -163,7 +160,6 @@ export default function CreateAssignmentPage() {
           </section>
 
 
-          {/* Submission Method */}
           <section>
             <h2 className="text-2xl font-bold text-[#0d141b] dark:text-white border-b border-slate-200 dark:border-slate-700 pb-3 mb-4">
               Submission Method
@@ -200,7 +196,6 @@ export default function CreateAssignmentPage() {
             </div>
           </section>
 
-          {/* Actions */}
           <div className="flex justify-end gap-4">
             <button
               type="button"
