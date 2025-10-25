@@ -1,8 +1,5 @@
-Based on your Joineazy assignment requirements and best practices for Next.js project documentation, here's a comprehensive README file for your GitHub repository:
 
-***
-
-# Assignment Management Dashboard - Joineazy Frontend Internship Task
+# Assignment Management Dashboard 
 
 A modern, responsive assignment management system built with **Next.js 15**, **React 19**, **TypeScript**, and **Tailwind CSS**. This application provides role-based dashboards for both students and administrators to manage assignments with status tracking and double-verification submission flow.
 
@@ -16,7 +13,7 @@ This project is a **full-stack frontend assignment** for the Joineazy Frontend I
 - **Students** can view their assignments, confirm submissions via a double-verification flow, and track their progress.
 - **Admins (Professors)** can create and manage assignments, attach Google Drive links for submissions, and visualize student progress through individual progress bars.
 
-Each user sees only their relevant data with fully responsive design across desktop and mobile devices.[1][2]
+Each user sees only their relevant data with fully responsive design across desktop and mobile devices.
 
 ***
 
@@ -88,11 +85,15 @@ npm run dev
 ```
 
 4. **Open your browser:**
+```bash
 Navigate to [http://localhost:3000](http://localhost:3000) to see the application it will be blank at first.
+```
 
 5. **Change the url:**
+```bash
 Navigate to [http://localhost:3000/AdminPage](http://localhost:3000/AdminPage) to see the application.
 Navigate to [http://localhost:3000/studentPage](http://localhost:3000) to see the application.
+```
 
 ***
 
@@ -121,17 +122,20 @@ docker run -d -p 4000:3000 deepak8101/joins:latest
 ```
 
 4. **Open your browser:**
+```bash
 Navigate to [http://localhost:4000](http://localhost:4000) to see the application it will be blank at first.
+```
 
 5. **Change the url:**
+```bash
 Navigate to [http://localhost:4000/AdminPage](http://localhost:4000/AdminPage) to see the application.
 Navigate to [http://localhost:4000/studentPage](http://localhost:4000/studentPage) to see the application.
-
+```
 ***
 
 ### 3. Vist the deployet site
-```bash
 The application is deployed on **Vercel** for seamless Next.js hosting:
+```bash
 **Live URL:** [https://internship-seven-psi.vercel.app](https://internship-seven-psi.vercel.app)
 ```
 
@@ -218,7 +222,7 @@ joins-dashboard
 
 ### Key Directories Explained
 
-- **`app/`**: Next.js 15 App Router directory containing all routes and layouts[3][1]
+- **`app/`**: Next.js 15 App Router directory containing all routes and layouts
 - **`components/`**: Reusable React components following atomic design principles
 - **`context/`**: Context API providers for global state (assignments, user role)
 - **`public/`**: Static assets like images
@@ -236,39 +240,37 @@ Chose Context API over Redux/Zustand for simplicity since the app's state requir
 - Local storage synchronization
 
 ### 3. **LocalStorage for Backend**
-Since no backend API was provided, implemented client-side data persistence using `localStorage`. Data is loaded on mount using `useEffect` to avoid SSR hydration errors.[4][5][6]
+Since no backend API was provided, implemented client-side data persistence using `localStorage`. Data is loaded on mount using `useEffect` to avoid SSR hydration errors.
 
 ### 4. **Responsive Design with Tailwind CSS**
-Used Tailwind's utility-first approach with responsive breakpoints (`sm:`, `md:`, `lg:`) to ensure mobile-first, fluid layouts without writing custom CSS.[1][3]
+Used Tailwind's utility-first approach with responsive breakpoints (`sm:`, `md:`, `lg:`) to ensure mobile-first, fluid layouts without writing custom CSS.
 
 ### 5. **TypeScript for Type Safety**
-All components, contexts, and utilities are strongly typed to catch errors during development and improve IDE autocomplete support.[7][2]
+All components, contexts, and utilities are strongly typed to catch errors during development and improve IDE autocomplete support.
 
 ***
 
-## 🧩 Component Structure
+## 🧩 **Component Structure**
 
-### Core Components
+### **Core Components**
 
-#### `ConfirmationModal.tsx`
-Double-verification modal to confirm assignment submission
+#### **`ConfirmationModal.tsx`**
+A modal used for double-verification to confirm assignment submission.
 
-#### `AdminAssignmentTable.tsx`
-Table view for admin dashboard 
+#### **`AdminAssignmentTable.tsx`**
+Displays a table view of assignments for the admin dashboard. Allows the admin to manage assignments effectively.
 
-#### `AssignmentTable.tsx`
-Table view for student dashboard 
+#### **`AssignmentTable.tsx`**
+Displays a table view of assignments for the student dashboard. Helps students track their assignments and due dates.
 
-#### `Sidebar.tsx`
-Admin navigation sidebar 
+#### **`Sidebar.tsx`**
+Provides the navigation sidebar for the admin panel, offering quick access to different management sections.
 
-#### `EmptyState.tsx`
-To show if it's empty
+#### **`EmptyState.tsx`**
+Displays an empty state message or graphic when there are no assignments available or other relevant data.
 
-#### `AdminCreateForm.tsx`
-To create Assignments
-
-***
+#### **`AdminCreateForm.tsx`**
+A form component used by the admin to create new assignments and manage assignment details.
 
 ## 📝 Design Decisions Summary
 
