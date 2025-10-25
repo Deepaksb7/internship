@@ -54,7 +54,7 @@ export default function AssignmentTable({ assignments, onSubmitClick }: Props) {
   );
 }
 
-function StatusBadge({ status }: { status: string }) {
+function StatusBadge({ status = "Not Started" }: { status?: string }) {
   const colorMap: Record<string, string> = {
     "Not Started": "bg-gray-100 text-gray-800",
     "In Progress": "bg-yellow-100 text-yellow-800",

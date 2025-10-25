@@ -1,134 +1,96 @@
-// components/AssignmentTable.tsx
-import React from "react";
+"use client";
 
-interface Assignment {
-  title: string;
-  course: string;
-  dueDate: string;
-  score: number;
-  maxScore: number;
-  late?: boolean;
-  actionLabel: string;
-  actionLink: string;
+import React, { useEffect, useState } from "react";
+import { Assignment } from "@/types/assignment";
+import { useRouter } from "next/navigation";
+
+interface AdminAssignmentTableProps {
+  assignments: Assignment[];
+  setAssignments: React.Dispatch<React.SetStateAction<Assignment[]>>;
 }
 
-const assignments: Assignment[] = [
-  {
-    title: "History Essay - The Roman Empire",
-    course: "HIST 101",
-    dueDate: "Oct 26, 2024 at 11:59 PM",
-    score: 83,
-    maxScore: 100,
-    actionLabel: "View Submissions",
-    actionLink: "#",
-  },
-  {
-    title: "Calculus Problem Set 3",
-    course: "MATH 203",
-    dueDate: "Oct 28, 2024 at 5:00 PM",
-    score: 95,
-    maxScore: 100,
-    actionLabel: "Grade",
-    actionLink: "#",
-  },
-  {
-    title: "Literary Analysis Paper",
-    course: "ENGL 102",
-    dueDate: "Nov 02, 2024 at 11:59 PM",
-    score: 100,
-    maxScore: 100,
-    actionLabel: "View Submissions",
-    actionLink: "#",
-  },
-  {
-    title: "Physics Lab Report",
-    course: "PHYS 101",
-    dueDate: "Oct 20, 2024 at 11:59 PM",
-    score: 45,
-    maxScore: 100,
-    late: true,
-    actionLabel: "View Submissions",
-    actionLink: "#",
-  },
-];
+const AdminAssignmentTable: React.FC<AdminAssignmentTableProps> = ({
+  assignments,
+  setAssignments,
+}) => {
+  const router = useRouter();
 
-const AdminAssignmentTable: React.FC = () => {
+  // Delete assignment handler
+  // const handleDelete = (id: string) => {
+  //   const updated = assignments.filter((a) => a.id !== id);
+  //   setAssignments(updated);
+  //   localStorage.setItem("assignments", JSON.stringify(updated));
+  // };
+  console.log(assignments,"admin assignment table");
+  // setAssignments(assignments);
+  const AssignmentFormOpenHandler = () => {
+    router.push("/AdminPage/form");
+  };
+
   return (
-    <div className="mt-4 container">
-      <div className="overflow-hidden rounded-xl border border-[#cfdbe7] dark:border-slate-800 bg-white dark:bg-background-dark/50">
-        <table className="w-full">
-          <thead>
-            <tr className="bg-slate-50 dark:bg-slate-900">
-              <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">
-                Assignment Title
-              </th>
-              <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">
-                Due Date
-              </th>
-              <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">
-                Submissions
-              </th>
-              <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">
-                Actions
-              </th>
+    <>
+      <div className="overflow-hidden rounded-xl border border-gray-200 bg-white text-black">
+        <table className="w-full text-sm">
+          <thead className="bg-gray-50 text-gray-500 font-normal">
+            <tr>
+              <th className="text-left p-3 w-[35%]">Assignment Title & Course</th>
+              <th className="text-left p-3 w-[25%]">Due Date</th>
+              <th className="text-left p-3 w-[15%]">Status</th>
+              <th className="text-left p-3 w-[25%]">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#cfdbe7] dark:divide-slate-800">
-            {assignments.map((assignment, index) => {
-              const percentage = (assignment.score / assignment.maxScore) * 100;
-              const progressColor = percentage >= 70 ? "#7ED321" : "#D0021B";
-
-              return (
-                <tr
-                  key={index}
-                  className="hover:bg-slate-50 dark:hover:bg-slate-800/50"
-                >
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900 dark:text-white">
-                      {assignment.title}
-                    </div>
-                    <div className="text-sm text-gray-500 dark:text-slate-400">
-                      {assignment.course}
-                    </div>
-                  </td>
-                  <td
-                    className={`px-6 py-4 whitespace-nowrap text-sm ${
-                      assignment.late
-                        ? "text-yellow-500"
-                        : "text-gray-500 dark:text-slate-400"
-                    }`}
+          <tbody>
+            {assignments.map((a) => (
+              <tr key={a.id} className="hover:bg-gray-100">
+                <td className="p-3 font-medium">
+                  {a.title}
+                  <span className="block text-xs text-gray-500">{a.course}</span>
+                </td>
+                <td className="p-3">{a.dueDate}</td>
+                <td className="p-3">
+                  <StatusBadge status={a.status} />
+                </td>
+                <td className="p-3 flex gap-2">
+                  <a className="text-primary hover:underline" href="#">
+                    View
+                  </a>
+                  <button
+                    className="text-red-600 hover:underline"
+                    // onClick={() => handleDelete(a.id)}
                   >
-                    {assignment.dueDate} {assignment.late ? "(Late)" : ""}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center gap-3">
-                      <div className="w-28 bg-gray-200 dark:bg-slate-700 rounded-full h-2.5">
-                        <div
-                          className="h-2.5 rounded-full"
-                          style={{ width: `${percentage}%`, backgroundColor: progressColor }}
-                        ></div>
-                      </div>
-                      <p className="text-sm font-medium text-gray-900 dark:text-white">
-                        {assignment.score}/{assignment.maxScore}
-                      </p>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <a
-                      className="text-primary hover:text-primary/80"
-                      href={assignment.actionLink}
-                    >
-                      {assignment.actionLabel}
-                    </a>
-                  </td>
-                </tr>
-              );
-            })}
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
-    </div>
+
+      <button
+        className="mt-4 px-4 py-2 bg-primary text-white rounded"
+        onClick={AssignmentFormOpenHandler}
+      >
+        Add Assignment
+      </button>
+    </>
   );
 };
+
+function StatusBadge({ status = "Not Started" }: { status?: string }) {
+  const colorMap: Record<string, string> = {
+    "Not Started": "bg-gray-100 text-gray-800",
+    "In Progress": "bg-yellow-100 text-yellow-800",
+    Submitted: "bg-green-100 text-green-800",
+    Graded: "bg-blue-100 text-blue-800",
+    Overdue: "bg-red-100 text-red-800",
+  };
+
+  return (
+    <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${colorMap[status]}`}>
+      {status}
+    </span>
+  );
+}
 
 export default AdminAssignmentTable;

@@ -1,11 +1,11 @@
 export type AssignmentStatus = "Not Started" | "In Progress" | "Submitted" | "Graded" | "Overdue";
 
 export interface Assignment {
-  id: number;
+  id: string;
   title: string;
   course: string;
   dueDate: string;
-  status: AssignmentStatus;
+  status?: AssignmentStatus;
 }
 
 // types.ts
@@ -28,4 +28,8 @@ export interface Assignments {
   actionLink: string;
   submissions: Submission[]; 
 }
+
+
+
+
 
