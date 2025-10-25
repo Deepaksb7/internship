@@ -85,15 +85,14 @@ npm run dev
 ```
 
 4. **Open your browser:**
-```bash
+
 Navigate to [http://localhost:3000](http://localhost:3000) to see the application it will be blank at first.
-```
+
 
 5. **Change the url:**
-```bash
 Navigate to [http://localhost:3000/AdminPage](http://localhost:3000/AdminPage) to see the application.
 Navigate to [http://localhost:3000/studentPage](http://localhost:3000) to see the application.
-```
+
 
 ***
 
@@ -122,22 +121,20 @@ docker run -d -p 4000:3000 deepak8101/joins:latest
 ```
 
 4. **Open your browser:**
-```bash
 Navigate to [http://localhost:4000](http://localhost:4000) to see the application it will be blank at first.
-```
+
 
 5. **Change the url:**
-```bash
 Navigate to [http://localhost:4000/AdminPage](http://localhost:4000/AdminPage) to see the application.
 Navigate to [http://localhost:4000/studentPage](http://localhost:4000/studentPage) to see the application.
-```
+
 ***
 
 ### 3. Vist the deployet site
 The application is deployed on **Vercel** for seamless Next.js hosting:
-```bash
+
 **Live URL:** [https://internship-seven-psi.vercel.app](https://internship-seven-psi.vercel.app)
-```
+
 
 ***
 
@@ -232,7 +229,7 @@ joins-dashboard
 ## 🏗️ Tech Stack Decisions
 
 ### 1. **Next.js App Router (v15)**
-Used the latest App Router for file-based routing, server components, and improved performance. Layouts are nested to apply admin-specific UI (sidebar) only where needed.[2][1]
+Used the latest App Router for file-based routing, server components, and improved performance. Layouts are nested to apply admin-specific UI (sidebar) only where needed.
 
 ### 2. **Context API for State Management**
 Chose Context API over Redux/Zustand for simplicity since the app's state requirements are minimal. The `AssignmentsContext` manages:
