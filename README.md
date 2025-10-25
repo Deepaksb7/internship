@@ -133,8 +133,11 @@ Navigate to [http://localhost:4000/studentPage](http://localhost:4000/studentPag
 ### 3. Vist the deployet site
 The application is deployed on **Vercel** for seamless Next.js hosting:
 
-**Live URL:** [https://internship-seven-psi.vercel.app](https://internship-seven-psi.vercel.app)
+1. **Live URL:** [https://internship-seven-psi.vercel.app](https://internship-seven-psi.vercel.app)
 
+2. **Change the url or directly open the below links:**
+Navigate to [https://internship-seven-psi.vercel.app/AdminPage](https://internship-seven-psi.vercel.app/AdminPage) to see the application.
+Navigate to [https://internship-seven-psi.vercel.app/studentPage](https://internship-seven-psi.vercel.app/studentPage) to see the application.
 
 ***
 
