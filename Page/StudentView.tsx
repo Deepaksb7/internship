@@ -6,24 +6,35 @@ import Header from "@/components/Header";
 import AssignmentTable from "@/components/AssignmentTable";
 import EmptyState from "@/components/EmptyState";
 import SubmissionModal from "@/components/SubmissionModal";
+import { loadAssignments } from "@/utils/Storage";
 
 
 export default function StudentView() {
-  const [assignments, setAssignments] = useState<Assignment[]>([]);
+   const [assignments, setAssignments] = useState<Assignment[]>([]);
+
   const [selectedAssignment, setSelectedAssignment] = useState<Assignment | null>(null);
 
   useEffect(() => {
-    const storedAssignments = localStorage.getItem("assignments");
-    if (storedAssignments) {
-      setAssignments(JSON.parse(storedAssignments));
-    } else {
-      setAssignments([]);
-    }
-  }, []);
 
+    const fetchAssignments = async () => {
+      const loadedAssignments = await loadAssignments();
+      setAssignments(loadedAssignments);
+    };
+
+    fetchAssignments();
+
+    const handleStorage = () => {
+      fetchAssignments(); 
+    };
+
+    window.addEventListener("storage", handleStorage);
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+    };
+  }, []); 
 
   return (
-    <div className="min-h-screen bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-200 ">
+    <div className=" min-h-screen bg-background-light text-gray-800">
       <Header />
 
       <main className="max-w-6xl mx-auto p-6 text-black my-8">

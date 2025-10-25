@@ -33,7 +33,6 @@ const CreateAssignmentPage = () => {
           </p>
         </div>
 
-        {/* Assignment Details */}
         <section className="mb-6">
           <h2 className="text-2xl font-bold text-[#0d141b] dark:text-white border-b border-slate-200 dark:border-slate-700 pb-3 mb-4">
             Assignment Details
@@ -60,10 +59,7 @@ const CreateAssignmentPage = () => {
                 value={course}
                 onChange={(e) => setCourse(e.target.value)}
                 className="form-select rounded-lg border border-[#cfdbe7] dark:border-slate-700 bg-background-light dark:bg-background-dark text-[#0d141b] dark:text-white h-14 p-4 placeholder:text-[#4c739a] dark:placeholder-slate-500 focus:outline-0 focus:ring-2 focus:ring-primary/50 appearance-none bg-no-repeat bg-right"
-                style={{
-                  backgroundImage:
-                    "url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2724px%27 height=%2724px%27 fill=%27rgb(76,115,154)%27 viewBox=%270 0 256 256%27%3e%3cpath d=%27M215.39 92.94a8 8 0 00-11.38 0L128 169.37 51.94 93.31a8 8 0 00-11.32 11.32l82.06 82.06a8 8 0 0011.32 0l81.39-81.38a8 8 0 000-11.37z%27%3e%3c/path%3e%3c/svg%3e')",
-                }}
+                
               >
                 <option value="">Select a Course</option>
                 <option value="cs101">Computer Science 101</option>
@@ -98,7 +94,6 @@ const CreateAssignmentPage = () => {
           </div>
         </section>
 
-        {/* Instructions */}
         <section className="mb-6">
           <h2 className="text-2xl font-bold text-[#0d141b] dark:text-white border-b border-slate-200 dark:border-slate-700 pb-3 mb-4">
             Instructions
@@ -111,7 +106,6 @@ const CreateAssignmentPage = () => {
           />
         </section>
 
-        {/* Submission Method */}
         <section className="mb-6">
           <h2 className="text-2xl font-bold text-[#0d141b] dark:text-white border-b border-slate-200 dark:border-slate-700 pb-3 mb-4">
             Submission Method
@@ -140,7 +134,6 @@ const CreateAssignmentPage = () => {
           </button>
         </section>
 
-        {/* Actions */}
         <div className="flex justify-end gap-4">
           <button className="px-6 py-3 rounded-lg text-slate-700 dark:text-slate-300 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 font-semibold transition-colors">
             Cancel

@@ -4,11 +4,12 @@ export interface Assignment {
   id: string;
   title: string;
   course: string;
+  time: string;
   dueDate: string;
   status?: AssignmentStatus;
 }
 
-// types.ts
+
 export interface Submission {
   name: string;
   submitted: boolean;

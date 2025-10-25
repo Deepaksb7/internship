@@ -1,35 +1,42 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { Assignment } from "@/types/assignment";
+import React from "react";
 import { useRouter } from "next/navigation";
+import { Assignment } from "@/types/assignment";
+import { Trash2Icon } from "lucide-react"; 
 
 interface AdminAssignmentTableProps {
   assignments: Assignment[];
-  setAssignments: React.Dispatch<React.SetStateAction<Assignment[]>>;
+  deleteAssignment: (id: string) => void;
 }
 
 const AdminAssignmentTable: React.FC<AdminAssignmentTableProps> = ({
   assignments,
-  setAssignments,
+  deleteAssignment,
 }) => {
   const router = useRouter();
 
-  // Delete assignment handler
-  // const handleDelete = (id: string) => {
-  //   const updated = assignments.filter((a) => a.id !== id);
-  //   setAssignments(updated);
-  //   localStorage.setItem("assignments", JSON.stringify(updated));
-  // };
-  console.log(assignments,"admin assignment table");
-  // setAssignments(assignments);
+  const handleDelete = (id: string) => {
+    deleteAssignment(id); 
+  };
+
   const AssignmentFormOpenHandler = () => {
     router.push("/AdminPage/form");
   };
 
   return (
-    <>
-      <div className="overflow-hidden rounded-xl border border-gray-200 bg-white text-black">
+    <div className="max-w-[960px] mx-auto mt-6 ">
+
+      <div className="flex justify-end mb-4">
+        <button
+          className="px-6 py-3 rounded-lg text-white bg-primary hover:bg-primary/90 font-semibold transition-colors"
+          onClick={AssignmentFormOpenHandler}
+        >
+          Add Assignment
+        </button>
+      </div>
+
+      <div className="overflow-hidden rounded-xl border border-gray-200 bg-white text-black shadow-sm flex md:flex-row flex-col" >
         <table className="w-full text-sm">
           <thead className="bg-gray-50 text-gray-500 font-normal">
             <tr>
@@ -50,15 +57,15 @@ const AdminAssignmentTable: React.FC<AdminAssignmentTableProps> = ({
                 <td className="p-3">
                   <StatusBadge status={a.status} />
                 </td>
-                <td className="p-3 flex gap-2">
+                <td className="p-3 flex gap-2 items-center">
                   <a className="text-primary hover:underline" href="#">
                     View
                   </a>
                   <button
-                    className="text-red-600 hover:underline"
-                    // onClick={() => handleDelete(a.id)}
+                    className="text-red-600 hover:underline p-3 cursor-pointer"
+                    onClick={() => handleDelete(a.id)}
                   >
-                    Delete
+                    <Trash2Icon size={20} className="ml-5"/>
                   </button>
                 </td>
               </tr>
@@ -67,13 +74,7 @@ const AdminAssignmentTable: React.FC<AdminAssignmentTableProps> = ({
         </table>
       </div>
 
-      <button
-        className="mt-4 px-4 py-2 bg-primary text-white rounded"
-        onClick={AssignmentFormOpenHandler}
-      >
-        Add Assignment
-      </button>
-    </>
+    </div>
   );
 };
 
@@ -87,7 +88,9 @@ function StatusBadge({ status = "Not Started" }: { status?: string }) {
   };
 
   return (
-    <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${colorMap[status]}`}>
+    <span
+      className={`px-2.5 py-1 rounded-full text-xs font-medium ${colorMap[status]}`}
+    >
       {status}
     </span>
   );

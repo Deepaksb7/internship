@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function EmptyState() {
+export default function AdminEmptyState() {
   return (
     <div className="flex flex-col items-center text-center py-16 text-black">
       <Image
@@ -9,7 +9,6 @@ export default function EmptyState() {
         className="max-w-xs"
         width={400}
         height={300}
-        loading="eager"
       />
       <h3 className="font-bold text-lg mt-4">No Assignments to Display</h3>
       <p className="text-gray-500 mb-4">You currently have no assignments. Enjoy the break!</p>

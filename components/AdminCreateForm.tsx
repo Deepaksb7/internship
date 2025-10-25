@@ -48,7 +48,7 @@ export default function CreateAssignmentPage() {
       }));
     }
   };
-
+ 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const now = new Date();
@@ -59,7 +59,6 @@ export default function CreateAssignmentPage() {
       ...form,
       time: currentTime,
     };
-    
     addAssignment(newAssignment);
     toast("✅ Assignment created successfully!");
     setForm({

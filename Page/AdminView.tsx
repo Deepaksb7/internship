@@ -1,32 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import AdminAssignmentTable from "@/components/AdminAssignmentTable";
 import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
-import { Assignment } from "@/types/assignment";
+import { useAssignments } from "@/app/context/AssignmentsContext";
+import AdminEmptyState from "@/components/AdminEmptyState";
 
 export default function AdminView() {
-  const [assignments, setAssignments] = useState<Assignment[]>([]);
-
-  useEffect(() => {
-    const stored = localStorage.getItem("assignments");
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed)) setAssignments(parsed);
-        else setAssignments([]);
-      } catch {
-        setAssignments([]);
-      }
-    } else {
-      setAssignments([]);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("assignments", JSON.stringify(assignments));
-  }, [assignments]);
+  const { assignments, deleteAssignment } = useAssignments();
 
   return (
     <div className="flex min-h-screen">
@@ -34,14 +15,27 @@ export default function AdminView() {
       <div className="flex-1 flex flex-col">
         <Topbar />
         <main className="flex-1 p-6 lg:p-10 bg-background-light dark:bg-background-dark">
-          <h1 className="text-4xl font-black text-[#0d141b] dark:text-white">
-            Assignments
-          </h1>
-          <AdminAssignmentTable
-            assignments={assignments}
-            setAssignments={setAssignments}
-      
-          />
+          <div className="flex items-center justify-center  flex-col mb-8 ">
+
+            <h1 className="text-4xl font-black text-[#0d141b] dark:text-white mb-2">
+              Manage Assignments
+            </h1>
+
+            <p className="text-base text-[#4c739a] dark:text-slate-400">
+              View and manage all assignments.
+            </p>
+
+          </div>
+        
+
+          {assignments.length > 0 ? (
+            <AdminAssignmentTable
+              assignments={assignments}
+              deleteAssignment={deleteAssignment}
+            />
+          ) : (
+            <AdminEmptyState />
+          )}
         </main>
       </div>
     </div>

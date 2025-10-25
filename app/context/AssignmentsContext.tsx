@@ -1,49 +1,53 @@
 "use client";
 import { Assignment, } from '@/types/assignment';
 import { loadAssignments, saveAssignments } from '@/utils/Storage';
-import React, { createContext, useContext, useEffect } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 
 interface AssignmentsContextType {
     assignments: Assignment[];
     addAssignment: (assignment: Assignment) => void;
-    // deleteAssignment: (id: string) => void;
+    deleteAssignment: (id: string) => void;
 }
 const AssignmentsContext = createContext<AssignmentsContextType | undefined>(undefined);
 
 export const AssignmentsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
-    const [assignments, setAssignments] = React.useState<Assignment[]>([]);
+    const [assignments, setAssignments] = useState<Assignment[]>([]);
 
     useEffect(() => {
-        if (typeof window !== "undefined") {
-            setAssignments(loadAssignments());
-        }
+        const fetchAssignments = async () => {
+            if (typeof window !== "undefined") {
+                const loadedAssignments =loadAssignments();
+                setAssignments(loadedAssignments); 
+            }
+        };
+
+        fetchAssignments(); 
     }, []);
-    
+
     const addAssignment = (assignment: Assignment) => {
-        setAssignments(prev => {
-            const newAssignments = [...prev, assignment];
-            saveAssignments(newAssignments);
-          
-            return newAssignments;
+
+        const currentAssignmentsFromStorage = loadAssignments(); 
+        const newAssignments = [...currentAssignmentsFromStorage, assignment];
+
+        saveAssignments(newAssignments); 
+        setAssignments(newAssignments); 
+    };
+
+    const deleteAssignment = (id: string) => {
+        setAssignments(prevAssignments => {
+            const newAssignments = prevAssignments.filter(a => a.id !== id);
+            saveAssignments(newAssignments); 
+            return newAssignments; 
         });
     };
 
-    // const deleteAssignment = (id: string) => {
-    //     setAssignments(prev => {
-    //         const newAssignments = prev.filter(a => a.id !== id);
-    //         saveAssignments(newAssignments);
-    //         return newAssignments;
-    //     });
-    // };
     return (
-        <AssignmentsContext.Provider value={{ assignments, addAssignment }}>
+        <AssignmentsContext.Provider value={{ assignments, addAssignment, deleteAssignment }}>
             {children}
         </AssignmentsContext.Provider>
-    )
-
-
-}
+    );
+};
 
 export function useAssignments() {
     const context = useContext(AssignmentsContext);
